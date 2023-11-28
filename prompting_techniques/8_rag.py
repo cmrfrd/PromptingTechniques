@@ -76,18 +76,13 @@ class VectorDatabase(BaseModel):
             query_embedding_response.data[0].embedding
         )
 
-        # cosine similarity
+        # cosine similarity, get top k
         similarity: npt.NDArray[np.float32] = np.dot(query_embedding, self.embeddings.T) / (
             np.linalg.norm(query_embedding) * np.linalg.norm(self.embeddings, axis=1)
         )
-
-        # sort by similarity
         sorted_similarity_indices: npt.NDArray[np.int64] = np.argsort(similarity)[::-1]
-
-        # get top k
-        top_k_emojis: list[str] = [self.text[i] for i in sorted_similarity_indices[:k]]
-
-        return top_k_emojis
+        top_k: list[str] = [self.text[i] for i in sorted_similarity_indices[:k]]
+        return top_k
 
 
 @retry(wait=wait_random_exponential(multiplier=1, max=3))
