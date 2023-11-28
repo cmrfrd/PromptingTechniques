@@ -1,0 +1,127 @@
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]
+
+[tool.poetry]
+name = "prompting_techniques"
+version = "0.1.0"
+description = ""
+authors = [
+    "cmrfrd",
+]
+readme = "README.md"
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.12"
+numpy = "^1.24.1"
+openai = "^1.3.5"
+banks = "^0.1.1"
+typer = "^0.9.0"
+uvloop = "^0.19.0"
+tiktoken = "^0.5.1"
+instructor = "^0.4.0"
+pydantic = "^2.5.2"
+scikit-learn = "^1.3.2"
+pandas = "^2.1.3"
+tqdm = "^4.66.1"
+tabulate = "^0.9.0"
+tenacity = "^8.2.3"
+nltk = "^3.8.1"
+asyncstdlib = "^3.10.9"
+diskcache = "^5.6.3"
+aiocache = "^0.12.2"
+networkx = "^3.2.1"
+graphviz = "^0.20.1"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.10.0"
+flake8 = "^5.0.4"
+isort = "^5.10.1"
+pylint = "^2.15.5"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.3.1"
+
+[[tool.mypy.overrides]]
+module = [
+  'astroid.*',
+  'clip.*',
+  'cv2.*',
+  'dagster.*',
+  'dagster_celery.*',
+  'dask.*',
+  'dill.*',
+  'distributed.*',
+  'dotenv.*',
+  'fastapi.*',
+  'fsspec.*',
+  'h5py.*',
+  'joblib.*',
+  'keras-retinanet.*',
+  'mediapipe.*',
+  'moto.*',
+  'open_clip.*',
+  'pandas.*',
+  'pydantic.*',
+  'pylint.*',
+  'pyonepassword.*',
+  's3fs.*',
+  's3path.*',
+  'scipy.*',
+  'semver.*',
+  'skimage.*',
+  'sklearn.*',
+  'tensorflow.*',
+  'torch.*',
+  'torchvision.*',
+  'xgboost.*'
+]
+ignore_missing_imports = true
+exclude = [
+  "test/**/*_test.py",
+  "test/**/test_*.py"
+]
+
+[tool.pytest.ini_options]
+addopts = "--cov=prompting_techniques --cov-report=term-missing --random-order"
+asyncio_mode = "auto"
+env = [
+  "ENV=dev"
+]
+minversion = "6.0"
+
+[tool.coverage.run]
+omit = [
+  "**/_remote_module_non_scriptable.py",
+  "test/**/*.py",
+]
+
+[tool.black]
+line-length = 100
+target-version = ['py39']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+py_version = '39'
+
+[tool.mypy]
+disallow_any_unimported = false
+disallow_any_expr = false
+disallow_any_decorated = false
+disallow_any_generics = false
+disallow_any_explicit = false
+disallow_subclassing_any = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_return_any = true
+warn_redundant_casts = true
+strict_equality = true
+warn_unused_configs = true
